@@ -209,16 +209,14 @@ class _CountryListViewState extends State<CountryListView> {
                         _defaultTextStyle,
                   ),
                   // const SizedBox(width: 5),
-                ] else
-                  const SizedBox(width: 15),
-                Expanded(
-                  child: Text(
-                    CountryLocalizations.of(context)
-                            ?.countryName(countryCode: country.countryCode)
-                            ?.replaceAll(RegExp(r"\s+"), " ") ??
-                        country.name,
-                    style: _textStyle,
-                  ),
+                ] ,
+                  // const SizedBox(width: 15),
+                Text(
+                  CountryLocalizations.of(context)
+                          ?.countryName(countryCode: country.countryCode)
+                          ?.replaceAll(RegExp(r"\s+"), " ") ??
+                      country.name,
+                  style: _textStyle,
                 ),
               ],
             ),
