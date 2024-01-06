@@ -202,15 +202,15 @@ class _CountryListViewState extends State<CountryListView> {
                 else
                   widget.customFlagBuilder!(country),
                 if (widget.showPhoneCode && !country.iswWorldWide) ...[
-                  // const SizedBox(width: 15),
+                  const SizedBox(width: 10),
                   Text(
                     '${isRtl ? '' : '+'}${country.phoneCode}${isRtl ? '+' : ''}',
                     style: widget.countryListTheme?.textStylenum ??
                         _defaultTextStyle,
                   ),
-                  // const SizedBox(width: 5),
-                ] ,
-                  // const SizedBox(width: 15),
+                  const SizedBox(width: 5),
+                ],
+                // const SizedBox(width: 15),
                 Text(
                   CountryLocalizations.of(context)
                           ?.countryName(countryCode: country.countryCode)
@@ -236,14 +236,32 @@ class _CountryListViewState extends State<CountryListView> {
     );
   }
 
-  Widget _emojiText(Country country) => Text(
-        country.iswWorldWide
-            ? '\uD83C\uDF0D'
-            : Utils.countryCodeToEmoji(country.countryCode),
-        style: TextStyle(
-          fontSize: widget.countryListTheme?.flagSize ?? 20,
+  Widget _emojiText(Country country) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(
+        20.0,
+      ),
+      child: CircleAvatar(
+        backgroundColor: Colors.transparent,
+        radius: 20.0,
+        child: Stack(
+          children: [
+            Positioned.directional(
+              textDirection: TextDirection.rtl,
+              top: -18,
+              start: -5,
+              child: Text(
+                Utils.countryCodeToEmoji(country.countryCode),
+                style: const TextStyle(
+                  fontSize: 50.0,
+                ),
+              ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
   void _filterSearchResults(String query) {
     List<Country> _searchResult = <Country>[];

@@ -40,8 +40,12 @@ class MyApp extends StatelessWidget {
         const Locale('ja'),
         const Locale('id'),
         const Locale('cs'),
-        const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'), // Generic Simplified Chinese 'zh_Hans'
-        const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'), // Generic traditional Chinese 'zh_Hant'
+        const Locale.fromSubtags(
+            languageCode: 'zh',
+            scriptCode: 'Hans'), // Generic Simplified Chinese 'zh_Hans'
+        const Locale.fromSubtags(
+            languageCode: 'zh',
+            scriptCode: 'Hant'), // Generic traditional Chinese 'zh_Hant'
       ],
       localizationsDelegates: [
         CountryLocalizations.delegate,
@@ -65,37 +69,87 @@ class HomePage extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             showCountryPicker(
-              context: context,
-              //Optional.  Can be used to exclude(remove) one ore more country from the countries list (optional).
-              exclude: <String>['KN', 'MF'],
-              favorite: <String>['SE'],
-              //Optional. Shows phone code before the country name.
               showPhoneCode: true,
-              onSelect: (Country country) {
-                print('Select country: ${country.displayName}');
-              },
-              // Optional. Sets the theme for the country list picker.
+              showWorldWide: false,
+              context: context,
+              onSelect: (Country country) {},
               countryListTheme: CountryListThemeData(
-                // Optional. Sets the border radius for the bottomsheet.
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40.0),
-                  topRight: Radius.circular(40.0),
+                searchTextFaildPadding: EdgeInsets.only(
+                    top: 25, bottom: 38, right: 30.5, left: 30.5),
+                textStylenum: TextStyle(
+                  fontFamily: 'Ithra',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 21.3,
+                  color: Color.fromRGBO(147, 147, 147, 1.0),
                 ),
-                // Optional. Styles the search field.
-                inputDecoration: InputDecoration(
-                  labelText: 'Search',
-                  hintText: 'Start typing to search',
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: const Color(0xFF8C98A8).withOpacity(0.2),
+                dividerWidget: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 26.5),
+                  child: Container(
+                    width: 513,
+                    height: 1.0,
+                    color: Colors.grey,
+                  ),
+                ),
+                bottomSheetTopWidget: Padding(
+                  padding: EdgeInsets.only(top: 16, bottom: 10.6),
+                  child: Container(
+                    width: 48,
+                    height: 6.6,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(3.3),
                     ),
                   ),
                 ),
+                bottomSheetHeight: MediaQuery.sizeOf(context).height * .75,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(32),
+                  topRight: Radius.circular(32),
+                ),
+                inputDecoration: InputDecoration(
+                  fillColor: Colors.grey,
+                  filled: true,
+                  contentPadding: EdgeInsets.symmetric(
+                      horizontal:
+                          // (kIsWeb || size.width >= AppConstants.kIsWebValue)
+                          //     ? AppPadding.p10
+                          //     :
+                          5,
+                      vertical: 16),
+                  // prefixIcon: IconButton(
+                  //   onPressed: () {},
+                  //   icon: SvgPicture.asset(
+                  //     AssetsManager.searchIconPath,
+                  //     width: (kIsWeb || size.width >= AppConstants.kIsWebValue)
+                  //         ? AppSize.w30.w
+                  //         : AppSize.w26_6.w,
+                  //     height: (kIsWeb || size.width >= AppConstants.kIsWebValue)
+                  //         ? AppSize.h30.h
+                  //         : AppSize.h26_6.h,
+                  //   ),
+                  // ),
+                  border: InputBorder.none,
+                  hintText: "chooseCountry",
+                  hintStyle: TextStyle(
+                    fontFamily: "NotoKufiArabic-Regular",
+                    fontSize: 18.6,
+                    color: Colors.red,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+
+                textStyle: TextStyle(
+                  fontFamily: "NotoKufiArabic-SemiBold",
+                  color: Colors.red,
+                  fontSize: 21.3,
+                  fontWeight: FontWeight.w600,
+                ),
                 // Optional. Styles the text in the search field
                 searchTextStyle: TextStyle(
-                  color: Colors.blue,
+                  fontFamily: "NotoKufiArabic-Regular",
+                  color: Colors.red,
                   fontSize: 18,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             );
