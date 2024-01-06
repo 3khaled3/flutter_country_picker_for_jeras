@@ -10,6 +10,9 @@ class CountryListThemeData {
   ///
   /// If null, the style will be set to [TextStyle(fontSize: 16)]
   final TextStyle? textStyle;
+  final TextStyle? textStylenum;
+  final Widget? dividerWidget;
+  final Widget? bottomSheetTopWidget;
 
   ///The style to use for search box text.
   ///
@@ -38,19 +41,24 @@ class CountryListThemeData {
 
   /// the padding of the bottom sheet
   final EdgeInsets? padding;
+  final EdgeInsets? searchTextFaildPadding;
 
   /// the margin of the bottom sheet
   final EdgeInsets? margin;
 
   const CountryListThemeData({
     this.backgroundColor,
+    this.bottomSheetTopWidget,
     this.textStyle,
+    this.textStylenum,
+    this.dividerWidget,
     this.searchTextStyle,
     this.flagSize,
     this.inputDecoration,
     this.borderRadius,
     this.bottomSheetHeight,
     this.padding,
+    this.searchTextFaildPadding,
     this.margin,
   });
 }

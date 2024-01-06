@@ -128,10 +128,11 @@ class _CountryListViewState extends State<CountryListView> {
 
     return Column(
       children: <Widget>[
-        const SizedBox(height: 12),
+        widget.countryListTheme?.bottomSheetTopWidget ?? const SizedBox(),
         if (widget.showSearch)
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            padding: widget.countryListTheme?.searchTextFaildPadding ??
+                const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             child: TextField(
               autofocus: _searchAutofocus,
               controller: _searchController,
@@ -191,49 +192,51 @@ class _CountryListViewState extends State<CountryListView> {
           widget.onSelect(country);
           Navigator.pop(context);
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5.0),
-          child: Row(
-            children: <Widget>[
-              Row(
-                children: [
-                  const SizedBox(width: 20),
-                  if (widget.customFlagBuilder == null)
-                    _flagWidget(country)
-                  else
-                    widget.customFlagBuilder!(country),
-                  if (widget.showPhoneCode && !country.iswWorldWide) ...[
-                    const SizedBox(width: 15),
-                    SizedBox(
-                      width: 45,
-                      child: Text(
-                        '${isRtl ? '' : '+'}${country.phoneCode}${isRtl ? '+' : ''}',
-                        style: _textStyle,
+        child: Column(
+          children: [
+            Row(
+              children: <Widget>[
+                Row(
+                  children: [
+                    const SizedBox(width: 20),
+                    if (widget.customFlagBuilder == null)
+                      _flagWidget(country)
+                    else
+                      widget.customFlagBuilder!(country),
+                    if (widget.showPhoneCode && !country.iswWorldWide) ...[
+                      const SizedBox(width: 15),
+                      SizedBox(
+                        width: 45,
+                        child: Text(
+                          '${isRtl ? '' : '+'}${country.phoneCode}${isRtl ? '+' : ''}',
+                          style: widget.countryListTheme?.textStylenum ??
+                              _defaultTextStyle,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 5),
-                  ] else
-                    const SizedBox(width: 15),
-                ],
-              ),
-              Expanded(
-                child: Text(
-                  CountryLocalizations.of(context)
-                          ?.countryName(countryCode: country.countryCode)
-                          ?.replaceAll(RegExp(r"\s+"), " ") ??
-                      country.name,
-                  style: _textStyle,
+                      const SizedBox(width: 5),
+                    ] else
+                      const SizedBox(width: 15),
+                  ],
                 ),
-              ),
-            ],
-          ),
+                Expanded(
+                  child: Text(
+                    CountryLocalizations.of(context)
+                            ?.countryName(countryCode: country.countryCode)
+                            ?.replaceAll(RegExp(r"\s+"), " ") ??
+                        country.name,
+                    style: _textStyle,
+                  ),
+                ),
+              ],
+            ),
+            widget.countryListTheme?.dividerWidget ?? const SizedBox(),
+          ],
         ),
       ),
     );
   }
 
   Widget _flagWidget(Country country) {
-
     final bool isRtl = Directionality.of(context) == TextDirection.rtl;
     return SizedBox(
       // the conditional 50 prevents irregularities caused by the flags in RTL mode
