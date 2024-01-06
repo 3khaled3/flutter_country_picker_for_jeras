@@ -180,21 +180,21 @@ class _CountryListViewState extends State<CountryListView> {
 
     final bool isRtl = Directionality.of(context) == TextDirection.rtl;
 
-    return Material(
-      // Add Material Widget with transparent color
-      // so the ripple effect of InkWell will show on tap
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: () {
-          country.nameLocalized = CountryLocalizations.of(context)
-              ?.countryName(countryCode: country.countryCode)
-              ?.replaceAll(RegExp(r"\s+"), " ");
-          widget.onSelect(country);
-          Navigator.pop(context);
-        },
-        child: Column(
-          children: [
-            Row(
+    return Column(
+      children: [
+        Material(
+          // Add Material Widget with transparent color
+          // so the ripple effect of InkWell will show on tap
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              country.nameLocalized = CountryLocalizations.of(context)
+                  ?.countryName(countryCode: country.countryCode)
+                  ?.replaceAll(RegExp(r"\s+"), " ");
+              widget.onSelect(country);
+              Navigator.pop(context);
+            },
+            child: Row(
               children: <Widget>[
                 const SizedBox(width: 20),
                 if (widget.customFlagBuilder == null)
@@ -222,10 +222,10 @@ class _CountryListViewState extends State<CountryListView> {
                 ),
               ],
             ),
-            widget.countryListTheme?.dividerWidget ?? const SizedBox(),
-          ],
+          ),
         ),
-      ),
+      widget.countryListTheme?.dividerWidget ?? const SizedBox(),
+      ],
     );
   }
 
