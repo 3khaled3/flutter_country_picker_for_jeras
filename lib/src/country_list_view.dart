@@ -205,15 +205,12 @@ class _CountryListViewState extends State<CountryListView> {
                       widget.customFlagBuilder!(country),
                     if (widget.showPhoneCode && !country.iswWorldWide) ...[
                       const SizedBox(width: 15),
-                      SizedBox(
-                        width: 45,
-                        child: Text(
-                          '${isRtl ? '' : '+'}${country.phoneCode}${isRtl ? '+' : ''}',
-                          style: widget.countryListTheme?.textStylenum ??
-                              _defaultTextStyle,
-                        ),
+                      Text(
+                        '${isRtl ? '' : '+'}${country.phoneCode}${isRtl ? '+' : ''}',
+                        style: widget.countryListTheme?.textStylenum ??
+                            _defaultTextStyle,
                       ),
-                      const SizedBox(width: 5),
+                      // const SizedBox(width: 5),
                     ] else
                       const SizedBox(width: 15),
                   ],
