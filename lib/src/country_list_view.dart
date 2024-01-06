@@ -204,7 +204,7 @@ class _CountryListViewState extends State<CountryListView> {
                     else
                       widget.customFlagBuilder!(country),
                     if (widget.showPhoneCode && !country.iswWorldWide) ...[
-                      const SizedBox(width: 15),
+                      // const SizedBox(width: 15),
                       Text(
                         '${isRtl ? '' : '+'}${country.phoneCode}${isRtl ? '+' : ''}',
                         style: widget.countryListTheme?.textStylenum ??
