@@ -180,13 +180,13 @@ class _CountryListViewState extends State<CountryListView> {
 
     final bool isRtl = Directionality.of(context) == TextDirection.rtl;
 
-    return Column(
-      children: [
-        Material(
-          // Add Material Widget with transparent color
-          // so the ripple effect of InkWell will show on tap
-          color: Colors.transparent,
-          child: InkWell(
+    return Material(
+      // Add Material Widget with transparent color
+      // so the ripple effect of InkWell will show on tap
+      color: const Color.fromRGBO(0, 0, 0, 0),
+      child: Column(
+        children: [
+          InkWell(
             onTap: () {
               country.nameLocalized = CountryLocalizations.of(context)
                   ?.countryName(countryCode: country.countryCode)
@@ -196,21 +196,21 @@ class _CountryListViewState extends State<CountryListView> {
             },
             child: Row(
               children: <Widget>[
-                const SizedBox(width: 20),
+                // const SizedBox(width: 20),
                 if (widget.customFlagBuilder == null)
                   _flagWidget(country)
                 else
                   widget.customFlagBuilder!(country),
-                 if (widget.showPhoneCode && !country.iswWorldWide) ...[
-                      // const SizedBox(width: 15),
-                      Text(
-                        '${isRtl ? '' : '+'}${country.phoneCode}${isRtl ? '+' : ''}',
-                        style: widget.countryListTheme?.textStylenum ??
-                            _defaultTextStyle,
-                      ),
-                      // const SizedBox(width: 5),
-                    ] else
-                      const SizedBox(width: 15),
+                if (widget.showPhoneCode && !country.iswWorldWide) ...[
+                  // const SizedBox(width: 15),
+                  Text(
+                    '${isRtl ? '' : '+'}${country.phoneCode}${isRtl ? '+' : ''}',
+                    style: widget.countryListTheme?.textStylenum ??
+                        _defaultTextStyle,
+                  ),
+                  // const SizedBox(width: 5),
+                ] else
+                  const SizedBox(width: 15),
                 Expanded(
                   child: Text(
                     CountryLocalizations.of(context)
@@ -223,9 +223,9 @@ class _CountryListViewState extends State<CountryListView> {
               ],
             ),
           ),
-        ),
-      widget.countryListTheme?.dividerWidget ?? const SizedBox(),
-      ],
+          widget.countryListTheme?.dividerWidget ?? const SizedBox(),
+        ],
+      ),
     );
   }
 
