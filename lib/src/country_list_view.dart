@@ -196,7 +196,7 @@ class _CountryListViewState extends State<CountryListView> {
             },
             child: Row(
               children: <Widget>[
-                // const SizedBox(width: 20),
+                const SizedBox(width: 20),
                 if (widget.customFlagBuilder == null)
                   _flagWidget(country)
                 else
@@ -239,7 +239,7 @@ class _CountryListViewState extends State<CountryListView> {
   Widget _emojiText(Country country) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(
-        20.0,
+        50000,
       ),
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
