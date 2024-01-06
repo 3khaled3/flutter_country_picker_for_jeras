@@ -196,14 +196,12 @@ class _CountryListViewState extends State<CountryListView> {
           children: [
             Row(
               children: <Widget>[
-                Row(
-                  children: [
-                    const SizedBox(width: 20),
-                    if (widget.customFlagBuilder == null)
-                      _flagWidget(country)
-                    else
-                      widget.customFlagBuilder!(country),
-                    if (widget.showPhoneCode && !country.iswWorldWide) ...[
+                const SizedBox(width: 20),
+                if (widget.customFlagBuilder == null)
+                  _flagWidget(country)
+                else
+                  widget.customFlagBuilder!(country),
+                 if (widget.showPhoneCode && !country.iswWorldWide) ...[
                       // const SizedBox(width: 15),
                       Text(
                         '${isRtl ? '' : '+'}${country.phoneCode}${isRtl ? '+' : ''}',
@@ -213,8 +211,6 @@ class _CountryListViewState extends State<CountryListView> {
                       // const SizedBox(width: 5),
                     ] else
                       const SizedBox(width: 15),
-                  ],
-                ),
                 Expanded(
                   child: Text(
                     CountryLocalizations.of(context)
